@@ -137,7 +137,16 @@ public class MissIndicatorPlugin extends Plugin
 			return;
 		}
 
-		if (local.getAnimation() == IDLE_ANIMATION)
+		int animId = local.getAnimation();
+		if (animId == IDLE_ANIMATION)
+		{
+			return;
+		}
+
+		// Block / taking-hit animations (and other non-combat actions) play on the
+		// same animation channel as attacks. Filter them out so a tick where we were
+		// hit but didn't swing can't masquerade as a missed attack.
+		if (AttackAnimations.isNonAttackAnimation(animId))
 		{
 			return;
 		}
