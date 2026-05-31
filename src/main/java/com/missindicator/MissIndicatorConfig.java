@@ -119,21 +119,21 @@ public interface MissIndicatorConfig extends Config
 		return 0;
 	}
 
-	// ── Section: Text Style ───────────────────────────────────────────────────
+	// ── Section: Text Settings ───────────────────────────────────────────────────
 	// Mirrors the font/style knobs in Customizable XP Drops
 
 	@ConfigSection(
-		name = "Text Style",
-		description = "Font, style, and size options",
+		name = "Text Settings",
+		description = "Font, style, size and text color options",
 		position = 1
 	)
-	String textStyleSection = "textStyleSection";
+	String textSettingsSection = "textStyleSection";
 
 	@ConfigItem(
 		keyName = "fontName",
 		name = "Font",
 		description = "Font name for the miss text. Leave blank to use the RuneScape Bold font.",
-		section = textStyleSection,
+		section = textSettingsSection,
 		position = 0
 	)
 	default String fontName()
@@ -141,77 +141,67 @@ public interface MissIndicatorConfig extends Config
 		return "";
 	}
 
-	@ConfigItem(
-		keyName = "fontStyle",
-		name = "Font style",
-		description = "Style applied to the font",
-		section = textStyleSection,
-		position = 1
-	)
-	default MissFontStyle fontStyle()
-	{
-		return MissFontStyle.BOLD;
-	}
-
 	@Range(min = 8, max = 40)
 	@ConfigItem(
-		keyName = "fontSize",
-		name = "Font size",
-		description = "Size of the miss text in points",
-		section = textStyleSection,
-		position = 2
+			keyName = "fontSize",
+			name = "Font size",
+			description = "Size of the miss text in points",
+			section = textSettingsSection,
+			position = 1
 	)
 	default int fontSize()
 	{
 		return 16;
 	}
 
-	// ── Section: Colors ───────────────────────────────────────────────────────
-	// Mirrors the predicted-hit color pickers in Customizable XP Drops
-
-	@ConfigSection(
-		name = "Colors",
-		description = "Color options for the miss indicator",
+	@ConfigItem(
+		keyName = "fontStyle",
+		name = "Font style",
+		description = "Style applied to the font",
+		section = textSettingsSection,
 		position = 2
 	)
-	String colorSection = "colorSection";
+	default MissFontStyle fontStyle()
+	{
+		return MissFontStyle.BOLD;
+	}
 
 	@Alpha
 	@ConfigItem(
 		keyName = "missColor",
 		name = "Miss text color",
 		description = "Color of the miss indicator text",
-		section = colorSection,
-		position = 0
+		section = textSettingsSection,
+		position = 3
 	)
 	default Color missColor()
 	{
 		return new Color(255, 80, 80, 255);
 	}
 
-	@Alpha
 	@ConfigItem(
-		keyName = "outlineColor",
-		name = "Outline / shadow color",
-		description = "Color of the background effect (set alpha to 0 to disable)",
-		section = colorSection,
-		position = 1
-	)
-	default Color outlineColor()
-	{
-		return new Color(0, 0, 0, 200);
-	}
-
-	@ConfigItem(
-		keyName = "backgroundStyle",
-		name = "Background",
-		description = "Background or shadow drawn behind the text",
-		section = colorSection,
-		position = 2
+			keyName = "backgroundStyle",
+			name = "Background",
+			description = "Outline or shadow drawn behind the text",
+			section = textSettingsSection,
+			position = 4
 	)
 	default MissBackgroundStyle backgroundStyle()
 	{
 		return MissBackgroundStyle.SHADOW;
+	}
+
+	@Alpha
+	@ConfigItem(
+		keyName = "backgroundColor",
+		name = "Background color",
+		description = "Color of the background effect (set alpha to 0 to disable)",
+		section = textSettingsSection,
+		position = 5
+	)
+	default Color backgroundColor()
+	{
+		return new Color(0, 0, 0, 200);
 	}
 
 	// ── Section: Animation ────────────────────────────────────────────────────
@@ -260,27 +250,6 @@ public interface MissIndicatorConfig extends Config
 	default boolean fadeOut()
 	{
 		return true;
-	}
-
-	// ── Section: Sound ────────────────────────────────────────────────────────
-
-	@ConfigSection(
-		name = "Sound",
-		description = "Optional audio cue on miss",
-		position = 4
-	)
-	String soundSection = "soundSection";
-
-	@ConfigItem(
-		keyName = "playSoundOnMiss",
-		name = "Play sound on miss",
-		description = "Play the in-game block sound effect when an attack misses",
-		section = soundSection,
-		position = 0
-	)
-	default boolean playSoundOnMiss()
-	{
-		return false;
 	}
 
 	// ── Section: Detection ────────────────────────────────────────────────────

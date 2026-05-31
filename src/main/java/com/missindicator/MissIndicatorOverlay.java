@@ -139,7 +139,7 @@ public class MissIndicatorOverlay extends Overlay
 		}
 
 		Color textColor   = withAlpha(config.missColor(),    alpha);
-		Color bgColor     = withAlpha(config.outlineColor(), alpha);
+		Color bgColor     = withAlpha(config.backgroundColor(), alpha);
 
 		drawBackground(graphics, font, text, textX, textY, bgColor, fm);
 
